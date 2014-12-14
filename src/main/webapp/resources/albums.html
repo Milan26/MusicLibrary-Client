@@ -1,0 +1,98 @@
+<form name="addAlbumForm" class="css-form">
+    <table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="table table-hover table-condensed">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Release Date<br/>(mm-dd-yyyy)</th>
+            <th>Cover Art</th>
+            <th>Note</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    <div class="form-group">
+                        <input type="text" name="title"
+                               ng-model="albumToBeAdded.title" required/>
+                        <div class="alert alert-danger" role="alert"
+                             ng-show="addAlbumForm.$submitted || addAlbumForm.title.$touched
+                             && addAlbumForm.title.$invalid">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            <div ng-show="addAlbumForm.title.$error.required">Cannot be empty</div>
+                        </div>
+                    </div>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <input type="date" name="releaseDate"
+                               ng-model="albumToBeAdded.releaseDate" required/>
+                        <div class="alert alert-danger" role="alert"
+                             ng-show="addAlbumForm.$submitted || addAlbumForm.releaseDate.$touched
+                             && addAlbumForm.releaseDate.$invalid">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            <div ng-show="addAlbumForm.releaseDate.$error.required">Cannot be empty</div>
+                            <div ng-show="addAlbumForm.releaseDate.$error.date">Not a valid date format</div>
+                        </div>
+                    </div>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <input type="text" name="coverArt"
+                               ng-model="albumToBeAdded.coverArt"/>
+                    </div>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <textarea name="note"
+                               ng-model="albumToBeAdded.note" ng-maxlength="255"></textarea>
+                        <div ng-show="addAlbumForm.$submitted || addAlbumForm.title.$touched">
+                            <div ng-show="addAlbumForm.note.$error.maxlength">Max 255 characters are allowed</div>
+                        </div>
+                    </div>
+                </th>
+                <th></th>
+                <th>
+                    <button type="submit" class="btn btn-success" ng-click="createAlbum()"
+                            ng-disabled="!addAlbumForm.$valid">Add</button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="album in albums">
+                <td>{{album.id}}</td>
+                <td>
+                    <span ng-hide="album.editing">{{album.title}}</span>
+                    <input type="text" name="editableAlbum.title" ng-show="album.editing" ng-model="album.title" required />
+                    <div ng-show="album.editing && album.msg" class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span>{{album.msg}}</span>
+                    </div>
+                </td>
+                <td>
+                    <span ng-hide="album.editing">{{album.releaseDate | date: 'MM-dd-yyyy'}}</span>
+                    <input type="date" name="editableAlbum.releaseDate" ng-show="album.editing" ng-model="album.releaseDate" />
+                </td>
+                <td>
+                    <span ng-hide="album.editing"><img class="img-rounded" ng-src="{{album.coverArt}}"/></span>
+                    <input type="text" name="editableAlbum.coverArt" ng-show="album.editing" ng-model="album.coverArt" />
+                </td>
+                <td>
+                    <span ng-hide="album.editing">{{album.note}}</span>
+                    <textarea name="editableAlbum.note" ng-show="album.editing" ng-model="album.note"></textarea>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-warning" ng-click="album.selected = !album.selected; isSelected(album)">
+                        {{album.selected ? 'Submit' : 'Edit'}}
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" ng-click="deleteAlbum(album.id)">Remove</button>
+                </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
