@@ -7,6 +7,8 @@ var app = angular.module('musicLibrary-client.controllers', []);
 app.controller('AlbumController', ['$scope', 'AlbumsFactory', 'AlbumFactory', '$window', 'DTOptionsBuilder', 'DTColumnDefBuilder',
         function ($scope, AlbumsFactory, AlbumFactory, $window, DTOptionsBuilder, DTColumnDefBuilder) {
 
+            var error_panel = $("#error-panel");
+
             $scope.dtOptions = DTOptionsBuilder.newOptions().withBootstrap();
             $scope.dtOptions = {
                 dom: '<"top"lfp<"clear">>rt<"bottom"i<"clear">>',
@@ -37,28 +39,41 @@ app.controller('AlbumController', ['$scope', 'AlbumsFactory', 'AlbumFactory', '$
                 };
             }
 
-            function isAlbumValid(album) {
-                if (album.title == null || album.title == "") {
-                    album.msg = "Cannot be empty";
-                    return false;
-                }
-                return true;
-            }
-
-            $scope.isSelected = function (album) {
-                if (!isAlbumValid(album)) {
-                    album.selected = true;
-                }
-                album.selected ? $scope.makeAlbumEditable(album) : $scope.doneEditing(album);
-            };
-
             $scope.doneEditing = function (album) {
-                album.editing = false;
-                AlbumsFactory.update({}, createAlbumToBeUpdated(album));
+                if (!album.editing) {
+                    album.editing = true;
+                    return;
+                }
+                resetErrorPanel();
+                AlbumsFactory.update({}, createAlbumToBeUpdated(album),
+                    //success
+                    function( value ){
+                        $scope.addAlbumForm.error = false;
+                        album.editing = false;
+                    },
+                    //error
+                    function( error ){
+                        buildErrorPanel(error.data);
+                        album.selected = true;
+                        $scope.addAlbumForm.error = true;
+                    }
+                );
             };
 
-            $scope.makeAlbumEditable = function (album) {
-                album.editing = true;
+            $scope.createAlbum = function () {
+                resetErrorPanel();
+                AlbumsFactory.create({}, $scope.albumToBeAdded,
+                    //success
+                    function( value ){
+                        $scope.addAlbumForm.error = false;
+                        $window.location.reload();
+                    },
+                    //error
+                    function( error ){
+                        buildErrorPanel(error.data);
+                        $scope.addAlbumForm.error = true;
+                    }
+                )
             };
 
             $scope.deleteAlbum = function (albumId) {
@@ -66,10 +81,18 @@ app.controller('AlbumController', ['$scope', 'AlbumsFactory', 'AlbumFactory', '$
                 $window.location.reload();
             };
 
-            $scope.createAlbum = function () {
-                AlbumsFactory.create({}, $scope.albumToBeAdded);
-                $window.location.reload();
-            };
+            function buildErrorPanel(data) {
+                error_panel.append("<ul>");
+                for (var i = 0; i < data.fieldErrors.length; i++) {
+                    error_panel.append(
+                        "<li>" + "<b>" + data.fieldErrors[i].field + "</b>: " + data.fieldErrors[i].message + "</li>");
+                }
+                error_panel.append("</ul>");
+            }
+
+            function resetErrorPanel() {
+                error_panel.html('<div></div>');
+            }
 
             $scope.albums = AlbumsFactory.getAll();
         }]

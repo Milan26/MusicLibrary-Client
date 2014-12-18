@@ -31,7 +31,6 @@ a:hover, a:active, a:visited {
     text-decoration: none;
 }
 
-
 #wrapper {
     height: 100%;
     -webkit-transition: -webkit-filter 0.25s ease-in-out;
@@ -116,4 +115,24 @@ tbody tr {
 
 .dataTables_paginate {
     float: right;
+}
+
+.form-group {
+    display: table;
+}
+
+.form-group .alert {
+    padding: 3px;
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.form-group .alert span {
+    width: 10%;
+    display: inline-block;
+}
+
+.form-group .alert input {
+    width: 87%;
 }

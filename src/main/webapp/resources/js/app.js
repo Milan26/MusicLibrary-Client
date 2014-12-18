@@ -5,7 +5,7 @@
 angular.module('musicLibrary-client', ['datatables', 'musicLibrary-client.services', 'musicLibrary-client.controllers', 'ngRoute'])
     .config(function ($routeProvider, $httpProvider) {
         $routeProvider.when('/albums', {templateUrl: 'resources/albums.html', controller: 'AlbumController'});
-        //$routeProvider.otherwise({redirectTo: 'resources/index.html'});
+        $routeProvider.otherwise({redirectTo: 'resources/index.html'});
 
         /* CORS... */
         /* http://stackoverflow.com/questions/17289195/angularjs-post-data-to-external-rest-api */
