@@ -28,14 +28,14 @@
                 </th>
                 <th>
                     <div class="form-group">
-                        <input type="date" name="releaseDate"
+                        <input type="text" name="releaseDate"
                                ng-model="albumToBeAdded.releaseDate" required/>
                         <div class="alert alert-danger" role="alert"
                              ng-show="addAlbumForm.$submitted || addAlbumForm.releaseDate.$touched
                              && addAlbumForm.releaseDate.$invalid">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                             <div ng-show="addAlbumForm.releaseDate.$error.required">Cannot be empty</div>
-                            <div ng-show="addAlbumForm.releaseDate.$error.date">Not a valid date format</div>
+                            <div ng-show="addAlbumForm.releaseDate.$error.pattern">Not a valid date format</div>
                         </div>
                     </div>
                 </th>
@@ -57,7 +57,7 @@
                 <th></th>
                 <th>
                     <button type="submit" class="btn btn-success" ng-click="createAlbum()"
-                            ng-disabled="!addAlbumForm.$valid">Add</button>
+                            ng-disabled="addAlbumForm.$invalid">Add</button>
                 </th>
             </tr>
         </thead>
@@ -73,8 +73,8 @@
                     </div>
                 </td>
                 <td>
-                    <span ng-hide="album.editing">{{album.releaseDate | date: 'MM-dd-yyyy'}}</span>
-                    <input type="date" name="editableAlbum.releaseDate" ng-show="album.editing" ng-model="album.releaseDate" />
+                    <span ng-hide="album.editing">{{album.releaseDate}}</span>
+                    <input type="text" name="editableAlbum.releaseDate" ng-show="album.editing" ng-model="album.releaseDate" />
                 </td>
                 <td>
                     <span ng-hide="album.editing"><img class="img-rounded" ng-src="{{album.coverArt}}"/></span>

@@ -6,11 +6,11 @@ html {
 }
 
 body {
-    background-image: url('/resources/img/overlay.png'), -moz-linear-gradient(top, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.65)), url('/resources/img/bg.jpg');
-    background-image: url('/resources/img/overlay.png'), -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.65)), url('/resources/img/bg.jpg');
-    background-image: url('/resources/img/overlay.png'), -o-linear-gradient(top, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.65)), url('/resources/img/bg.jpg');
-    background-image: url('/resources/img/overlay.png'), -ms-linear-gradient(top, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.65)), url('/resources/img/bg.jpg');
-    background-image: url('/resources/img/overlay.png'), linear-gradient(top, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.65)), url('/resources/img/bg.jpg');
+    background-image: url('img/overlay.png'), -moz-linear-gradient(top, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.65)), url('img/bg.jpg');
+    background-image: url('img/overlay.png'), -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.65)), url('img/bg.jpg');
+    background-image: url('img/overlay.png'), -o-linear-gradient(top, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.65)), url('img/bg.jpg');
+    background-image: url('img/overlay.png'), -ms-linear-gradient(top, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.65)), url('img/bg.jpg');
+    background-image: url('img/overlay.png'), linear-gradient(top, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.65)), url('img/bg.jpg');
     background-size: auto, 100% 100%, cover;
 }
 
@@ -27,9 +27,10 @@ a {
     transition: color 0.25s ease-in-out;
 }
 
-a:hover {
+a:hover, a:active, a:visited {
     text-decoration: none;
 }
+
 
 #wrapper {
     height: 100%;
@@ -116,7 +117,3 @@ tbody tr {
 .dataTables_paginate {
     float: right;
 }
-
-/*.top div:last-child {*/
-/*text-align: right;*/
-/*}*/
