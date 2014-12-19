@@ -9,6 +9,8 @@
             <th>Duration [s]</th>
             <th>Genre</th>
             <th>Bitrate</th>
+            <th>Artist Id</th>
+            <th>Album Id</th>
             <th>Note</th>
             <th></th>
             <th></th>
@@ -54,12 +56,12 @@
                     <input type="number" name="bitrate" ng-model="songToBeAdded.bitrate"/>
                 </div>
             </th>
+            <th></th>
+            <th></th>
             <th>
                 <div class="form-group">
-                    <textarea name="note" ng-model="songToBeAdded.note" ng-maxlength="255"></textarea>
-                    <div class="alert alert-danger" role="alert" ng-show="addSongForm.note.$error.maxLength">
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    </div>
+                    <textarea name="note" ng-model="songToBeAdded.note" ng-maxlength="255"
+                              placeholder="Max 255 characters"></textarea>
                 </div>
             </th>
             <th></th>
@@ -113,6 +115,16 @@
                 <input ng-show="song.editing" type="number" name="editableSong.bitrate" ng-model="song.bitrate" />
             </td>
             <td>
+                <span ng-hide="song.editing">{{song.artist.id}}</span>
+                <select ng-show="song.editing" ng-options="artist.id for artist in artists"
+                        name="editableSong.artist" ng-model="song.artist"/>
+            </td>
+            <td>
+                <span ng-hide="song.editing">{{song.album.id}}</span>
+                <select ng-show="song.editing" ng-options="album.id for album in albums"
+                        name="editableSong.album" ng-model="song.album"/>
+            </td>
+            <td class="text-area">
                 <span ng-hide="song.editing">{{song.note}}</span>
                 <textarea ng-show="song.editing" name="editableSong.note" ng-model="song.note"></textarea>
             </td>

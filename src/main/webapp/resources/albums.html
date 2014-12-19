@@ -38,10 +38,8 @@
                 </th>
                 <th>
                     <div class="form-group">
-                        <textarea name="note" ng-model="albumToBeAdded.note" ng-maxlength="255"></textarea>
-                        <div class="alert alert-danger" role="alert" ng-show="addAlbumForm.note.$error.maxLength">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                        </div>
+                        <textarea name="note" ng-model="albumToBeAdded.note" ng-maxlength="255"
+                                  placeholder="Max 255 characters"></textarea>
                     </div>
                 </th>
                 <th></th>

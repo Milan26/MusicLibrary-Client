@@ -4,14 +4,14 @@
     <title>MusicLibrary-Client</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width">
-
+    <!-- Styles -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="http://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css"/>
     <link rel="stylesheet" href="resources/css/style-common.css"/>
 </head>
 
 <body>
-
+<!-- Navigation -->
 <div id="wrapper">
     <div id="nav">
         <ul>
@@ -21,7 +21,7 @@
     </div>
     <div id="content_wrapper" ng-view></div>
 </div>
-
+<!-- Global libs -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.js"></script>
@@ -31,12 +31,11 @@
 <!-- AngularJS modules -->
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-resource.min.js"></script>
-
-
-
+<!-- Local libs -->
 <script src="resources/js/app.js"></script>
 <script src="resources/js/services/album.js"></script>
 <script src="resources/js/services/song.js"></script>
+<script src="resources/js/services/artist.js"></script>
 <script src="resources/js/controllers/album.js"></script>
 <script src="resources/js/controllers/song.js"></script>
 </body>
