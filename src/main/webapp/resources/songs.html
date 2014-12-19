@@ -1,10 +1,130 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-SONGS
-</body>
-</html>
+<div id="error-panel" class="alert alert-danger" role="alert" ng-show="addSongForm.error"></div>
+<form name="addSongForm" class="css-form">
+    <table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="table table-hover table-condensed">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Track Number</th>
+            <th>Duration [s]</th>
+            <th>Genre</th>
+            <th>Bitrate</th>
+            <th>Note</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <thead>
+        <tr>
+            <th></th>
+            <th>
+                <div class="form-group">
+                    <div class="alert alert-warning" role="alert">
+                        <span title="required" class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <input type="text" name="title" ng-model="songToBeAdded.title" required/>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    <div class="alert alert-warning" role="alert">
+                        <span title="required" class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <input type="number" name="trackNumber" ng-model="songToBeAdded.trackNumber" required/>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    <div class="alert alert-warning" role="alert">
+                        <span title="required" class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <input type="number" name="duration" ng-model="songToBeAdded.duration" required/>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    <div class="alert alert-warning" role="alert">
+                        <span title="required" class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <select name="genre" ng-options="genre for genre in genres" ng-model="songToBeAdded.genre" required></select>
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    <input type="number" name="bitrate" ng-model="songToBeAdded.bitrate"/>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    <textarea name="note" ng-model="songToBeAdded.note" ng-maxlength="255"></textarea>
+                    <div class="alert alert-danger" role="alert" ng-show="addSongForm.note.$error.maxLength">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    </div>
+                </div>
+            </th>
+            <th></th>
+            <th>
+                <button type="submit" class="btn btn-success"
+                        ng-click="createSong()" ng-disabled="addSongForm.$invalid">Add</button>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="song in songs">
+            <td>{{song.id}}</td>
+            <td>
+                <span ng-hide="song.editing">{{song.title}}</span>
+                <div ng-show="song.editing" class="form-group">
+                    <div class="alert alert-warning" role="alert">
+                        <span title="required" class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <input type="text" name="editableSong.title" ng-model="song.title"/>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <span ng-hide="song.editing">{{song.trackNumber}}</span>
+                <div ng-show="song.editing" class="form-group">
+                    <div class="alert alert-warning" role="alert">
+                        <span title="required" class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <input type="number" name="editableSong.title" ng-model="song.trackNumber"/>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <span ng-hide="song.editing">{{song.duration}}</span>
+                <div ng-show="song.editing" class="form-group">
+                    <div class="alert alert-warning" role="alert">
+                        <span title="required" class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <input type="number" name="editableSong.duration" ng-model="song.duration"/>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <span ng-hide="song.editing">{{song.genre}}</span>
+                <div ng-show="song.editing" class="form-group">
+                    <div class="alert alert-warning" role="alert">
+                        <span title="required" class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <select name="editableSong.genre" ng-options="genre for genre in genres" ng-model="song.genre"></select>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <span ng-hide="song.editing">{{song.bitrate}}</span>
+                <input ng-show="song.editing" type="number" name="editableSong.bitrate" ng-model="song.bitrate" />
+            </td>
+            <td>
+                <span ng-hide="song.editing">{{song.note}}</span>
+                <textarea ng-show="song.editing" name="editableSong.note" ng-model="song.note"></textarea>
+            </td>
+            <td>
+                <button type="button" class="btn btn-warning" ng-click="doneEditing(song)">
+                    {{song.editing ? 'Submit' : 'Edit'}}
+                </button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger" ng-click="deleteSong(song.id)">Remove</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>

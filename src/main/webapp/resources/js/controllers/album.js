@@ -2,10 +2,8 @@
  * Created by Milan on 12.12.2014.
  */
 
-var app = angular.module('musicLibrary-client.controllers', []);
-
-app.controller('AlbumController', ['$scope', 'AlbumsFactory', 'AlbumFactory', '$window', 'DTOptionsBuilder', 'DTColumnDefBuilder',
-        function ($scope, AlbumsFactory, AlbumFactory, $window, DTOptionsBuilder, DTColumnDefBuilder) {
+controllers.controller('AlbumController',
+    function ($scope, AlbumsFactory, AlbumFactory, $window, DTOptionsBuilder, DTColumnDefBuilder) {
 
             var error_panel = $("#error-panel");
 
@@ -47,12 +45,12 @@ app.controller('AlbumController', ['$scope', 'AlbumsFactory', 'AlbumFactory', '$
                 resetErrorPanel();
                 AlbumsFactory.update({}, createAlbumToBeUpdated(album),
                     //success
-                    function( value ){
+                    function (value) {
                         $scope.addAlbumForm.error = false;
                         album.editing = false;
                     },
                     //error
-                    function( error ){
+                    function (error) {
                         buildErrorPanel(error.data);
                         album.selected = true;
                         $scope.addAlbumForm.error = true;
@@ -64,13 +62,14 @@ app.controller('AlbumController', ['$scope', 'AlbumsFactory', 'AlbumFactory', '$
                 resetErrorPanel();
                 AlbumsFactory.create({}, $scope.albumToBeAdded,
                     //success
-                    function( value ){
+                    function (value) {
                         $scope.addAlbumForm.error = false;
                         $window.location.reload();
                     },
                     //error
-                    function( error ){
-                        buildErrorPanel(error.data);
+                    function (error) {
+                        if (error.data != "")
+                            buildErrorPanel(error.data);
                         $scope.addAlbumForm.error = true;
                     }
                 )
@@ -95,5 +94,5 @@ app.controller('AlbumController', ['$scope', 'AlbumsFactory', 'AlbumFactory', '$
             }
 
             $scope.albums = AlbumsFactory.getAll();
-        }]
+        }
 );

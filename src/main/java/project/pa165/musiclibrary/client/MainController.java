@@ -5,13 +5,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
-* @author Milan
-*/
+ * @author Milan
+ */
 @Controller
 public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
-        return "resources/index.html";
+        return "resources/main.html";
     }
 }
