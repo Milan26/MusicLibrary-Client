@@ -93,6 +93,17 @@ controllers.controller('AlbumController',
                 error_panel.html('<div></div>');
             }
 
-            $scope.albums = AlbumsFactory.getAll();
+            AlbumsFactory.getAll(
+                //success
+                function (value) {
+                    $scope.albums = value;
+                },
+                //error
+                function (error) {
+                    notReachableMessage = "We're sorry. Server is unreachable. Try again later.";
+                    $scope.addAlbumForm.error = true;
+                    error_panel.append("<span>" + notReachableMessage + "</span>");
+                }
+            );
         }
 );

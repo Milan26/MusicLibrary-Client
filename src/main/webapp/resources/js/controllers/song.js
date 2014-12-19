@@ -101,7 +101,18 @@ controllers.controller('SongController',
                 error_panel.html('<div></div>');
             }
 
-            $scope.songs = SongsFactory.getAll();
+            $scope.songs = SongsFactory.getAll(
+                //success
+                function (value) {
+                    $scope.albums = value;
+                },
+                //error
+                function (error) {
+                    notReachableMessage = "We're sorry. Server is unreachable. Try again later.";
+                    $scope.addSongForm.error = true;
+                    error_panel.append("<span>" + notReachableMessage + "</span>");
+                }
+            );
             $scope.genres = GenreFactory.getAll();
             $scope.albums = AlbumsFactory.getAll();
             $scope.artists = ArtistsFactory.getAll();
