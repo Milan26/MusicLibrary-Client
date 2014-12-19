@@ -20,9 +20,11 @@ controllers.controller('SongController',
                 DTColumnDefBuilder.newColumnDef(3),
                 DTColumnDefBuilder.newColumnDef(4),
                 DTColumnDefBuilder.newColumnDef(5),
-                DTColumnDefBuilder.newColumnDef(6).notSortable(),
-                DTColumnDefBuilder.newColumnDef(7).notSortable(),
-                DTColumnDefBuilder.newColumnDef(8).notSortable()
+                DTColumnDefBuilder.newColumnDef(6),
+                DTColumnDefBuilder.newColumnDef(7),
+                DTColumnDefBuilder.newColumnDef(8).notSortable(),
+                DTColumnDefBuilder.newColumnDef(9).notSortable(),
+                DTColumnDefBuilder.newColumnDef(10).notSortable()
             ];
 
             /**
