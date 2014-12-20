@@ -8,11 +8,34 @@ and little help of CSS stylesheets.
 
 ##Installation
 
+###Prerequisites
+
+* [Node.js](http://nodejs.org/)
+* [Bower](http://bower.io/)
+* [Grunt](http://gruntjs.com/)
+
 ####Running the client
 
-* Use commands below:
+#####Installing prerequisites
+* To be able to use project correctly you have to install Bower firstly. To install bower simply use
 ```sh
-	mvn clean install
-	mvn tomcat7:run
+	npm install -g bower
 ```
-* Now you can open browser and type [http://localhost:8081/pa165-client](http://localhost:8081/pa165-client)
+* Now install Grunt for project with command
+```sh
+	npm install -g grunt-cli
+```
+#####Installing third parties components
+* Install all node-modules with
+```sh
+	npm install
+```
+* Install all bower-components with
+```sh
+	bower install
+```
+#####Running the client
+* Start the project with
+```sh
+	grunt serve
+```
