@@ -2,7 +2,7 @@
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
-music-library-client.iml
+music-library-client/music-library-client.iml
 
 ## Directory-based project format:
 .idea/
