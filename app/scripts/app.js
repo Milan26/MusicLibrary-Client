@@ -5,8 +5,8 @@
 angular.module('musicLibrary-client',
     ['datatables', 'musicLibrary-client.services', 'musicLibrary-client.controllers', 'ngRoute'])
     .config(function ($routeProvider, $httpProvider) {
-        $routeProvider.when('/albums', {templateUrl: 'resources/albums.html', controller: 'AlbumController'});
-        $routeProvider.when('/songs', {templateUrl: 'resources/songs.html', controller: 'SongController'});
+        $routeProvider.when('/albums', {templateUrl: 'views/albums.html', controller: 'AlbumController'});
+        $routeProvider.when('/songs', {templateUrl: 'views/songs.html', controller: 'SongController'});
         $routeProvider.otherwise({redirectTo: '/'});
 
         /* CORS... */
