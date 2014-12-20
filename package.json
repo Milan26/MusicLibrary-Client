@@ -1,6 +1,10 @@
 {
-  "name": "client",
+  "name": "music-library-client",
   "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Milan26/music-library-client/tree/grunt"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "^0.4.1",
